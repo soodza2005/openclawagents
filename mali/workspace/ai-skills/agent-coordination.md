@@ -80,3 +80,29 @@ When transferring work between agents:
 - ACP sessions now support `streamTo: "parent"` for better visibility
 - Tool result truncation preserves tail diagnostics
 - Session key canonicalization (lowercase) ensures reliable routing
+- ACP session bootstrap retry mechanism reduces failures
+- Coding-agent reliability improved with `--permission-mode bypassPermissions`
+
+## Advanced Coordination Patterns (2026)
+
+### Fault Tolerance Mechanisms
+- **Retry with Backoff**: For transient errors (network, timeout), implement exponential backoff (5s → 10s → 20s → 40s)
+- **Error Classification**:
+  - Transient → Retry automatically
+  - LLM-recoverable → Attempt recovery, then retry
+  - Human-required → Alert Owner immediately
+- **Checkpointing**: Log intermediate state after each phase for long-running workflows
+
+### Structured Orchestration Phases
+1. **UNDERSTAND** - Analyze request, identify goals, determine routing
+2. **PLAN** - Break into subtasks, define order, set timeouts
+3. **ACT** - Spawn sessions, monitor progress, handle results
+4. **EVALUATE** - Verify, cross-check, synthesize, report
+
+### Evaluator-Optimizer Pattern
+- Use executing agent (Luna/Iris) for primary task
+- Evaluate output quality before reporting
+- If insufficient, send back for refinement
+
+---
+*Last Updated: 2026-03-08*

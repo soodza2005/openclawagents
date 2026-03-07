@@ -714,3 +714,83 @@ User → Capture → Extract → Store → Retrieve → Reflect → Better Respo
 
 **Logged by:** มะลิ 🌸  
 **Time:** 00:40, March 8, 2026
+
+---
+
+# Self-Improvement Log: 01:50, March 8, 2026
+
+---
+
+## OBSERVE
+
+**Topic:** AI Agent Skill Acquisition
+
+**Context:** สอน agent ให้เรียนรู้ skills ใหม่จากตัวอย่าง
+
+**Knowledge Gap:** วิธีสอน agent เรียนรู้ skill ใหม่
+
+---
+
+## RESEARCH TRAIL
+
+### Query 1 (English)
+**"AI agent skill acquisition automatic skill learning from examples 2025"**
+- Provider: Gemini (gemini-2.5-flash)
+- Sources: xcubelabs.com, nickyt.co, substack.com
+- Key findings:
+  - Learning agents: เรียนรู้จาก experience
+  - Agent Skills: มาตรฐานใหม่สำหรับ packaging knowledge
+  - Skill trigger: event → workflow อัตโนมัติ
+
+### Query 2 (English)
+**"AI agent skill creation from demonstration learning 2025"**
+- Provider: Gemini (gemini-2.5-flash)
+- Sources: shadecoder.com, relevanceai.com, dev.to
+- Key findings:
+  - Learning from Demonstration (LfD): สอนจากตัวอย่าง
+  - Hybrid Learning: ผสม LfD + Reinforcement Learning
+  - Multi-Agent: agents ทำงานร่วมกัน
+
+---
+
+## INSIGHT
+
+**Skill Acquisition 3 วิธี:**
+
+| วิธี | ตัวอย่าง |
+|--------|----------|
+| **Learning from Demonstration** | สอนจากตัวอย่าง |
+| **Skill Extraction** | ดึงจาก feedback |
+| **Tool Discovery** | ค้นหา tools ใหม่ |
+
+**Pipeline:**
+```
+Observe → Extract → Generalize → Store → Apply
+```
+
+---
+
+## ACTION
+
+**สร้าง Skill ใหม่:**
+- File: `SHARED/ai-skills/skill-acquisition/SKILL.md`
+- หัวข้อ: AI Agent Skill Acquisition
+- เนื้อหา: วิธีสอน agent เรียนรู้ skill ใหม่
+
+---
+
+## APPLICATION
+
+**มะลิสามารถปรับใช้:**
+- เก็บตัวอย่างจาก task ที่ทำ
+- สร้าง skill ใหม่จาก pattern
+- Trigger skills อัตโนมัติ
+
+---
+
+**Impact Level:** HIGH
+
+---
+
+**Logged by:** มะลิ 🌸  
+**Time:** 01:55, March 8, 2026
