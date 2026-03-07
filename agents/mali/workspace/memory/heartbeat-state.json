@@ -1,0 +1,20 @@
+{
+  "lastPairingCheck": 1773867780000,
+  "lastModelUsageCheck": 1773886620000,
+  "pendingRequests": [],
+  "modelUsage": {
+    "minimax": {
+      "name": "MiniMax M2.5",
+      "usagePercent": 1,
+      "cycle": "5hr cycle (15:00-20:00 UTC)",
+      "resetsIn": "4 hr 21 min"
+    },
+    "githubCopilot": {
+      "name": "GitHub Copilot",
+      "usagePercent": 80.3,
+      "cycle": "monthly",
+      "resetsAt": "start of next month",
+      "notified": true
+    }
+  }
+}

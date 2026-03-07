@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "profiles": {
+    "minimax-portal:default": {
+      "type": "oauth",
+      "provider": "minimax-portal",
+      "access": "sk-cp-IneQdY-f94c1kjRQGTIl-9PArPGqye6eS--JMGbDMFB3RyclHQ44mqcVWK4rkjo6pCLiGWNmrBNxjA11j5yfbO-8no5jPGtkybFuU91F2UJnwex8vYUdFsY",
+      "refresh": "6PYfLSCxxlPWnsVmnkfY7AjGWQOQSlb7GkgJZV0axBQ=",
+      "expires": 1804153934013
+    },
+    "github-copilot:github": {
+      "type": "token",
+      "provider": "github-copilot",
+      "token": "ghu_VhKtzGpuH9VwGYxc1Fw0R6aisUUqjn4IqhEv"
+    }
+  },
+  "usageStats": {
+    "minimax-portal:default": {
+      "errorCount": 0,
+      "lastUsed": 1772652054683
+    },
+    "github-copilot:github": {
+      "errorCount": 0,
+      "lastUsed": 1772636754521
+    }
+  }
+}
