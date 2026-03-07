@@ -1,0 +1,101 @@
+# Agent Tools Configuration
+# การตั้งค่า Agent Tools - แปลง Agent ให้ถูกเรียกเป็น Tool ได้
+
+# ═══════════════════════════════════════════════════════════════
+# Concept: Agent-as-Tool
+# ═══════════════════════════════════════════════════════════════
+# แนวคิดจาก AutoGen: แปลง Agent ให้ถูกเรียกเป็น Tool ได้เหมือน function
+# ทำให้การสื่อสารระหว่าง Agents ทำได้ง่ายขึ้น
+#
+# Example Usage:
+# แทนที่จะต้อง: sessions_spawn(agentId="pm_accounting", task="...")
+# สามารถเรียก: luna.accounting(task="...") ได้เลย
+# ═══════════════════════════════════════════════════════════════
+
+agent_tools:
+  # ═══════════════════════════════════════════════════════
+  # ลูน่า - Accounting Tool
+  # ═══════════════════════════════════════════════════════
+  luna_accounting:
+    agent_id: pm_accounting
+    name: luna_accounting
+    description: |
+      Tool สำหรับงานบัญชีและการเงิน
+      - GL (General Ledger)
+      - AP (Accounts Payable)
+      - AR (Accounts Receivable)
+      - ภาษี (VAT, Withholding Tax)
+      - งบการเงิน (P&L, Balance Sheet)
+    parameters:
+      - name: task
+        type: string
+        required: true
+        description: งานที่ต้องการให้ทำ
+      - name: month
+        type: string
+        required: false
+        description: เดือนที่ต้องการ (format: YYYY-MM)
+    example: |
+      luna_accounting(task="Run P&L Report", month="2026-02")
+
+  # ═══════════════════════════════════════════════════════
+  # ไอริส - HRMS Tool
+  # ═══════════════════════════════════════════════════════
+  iris_hrms:
+    agent_id: pm_hrms
+    name: iris_hrms
+    description: |
+      Tool สำหรับงานบุคคลและ HRMS
+      - ข้อมูลพนักงาน (Employee Management)
+      - เงินเดือน (Payroll)
+      - วันลา (Leave Management)
+      - KPI Performance
+      - PDPA Compliance
+    parameters:
+      - name: task
+        type: string
+        required: true
+        description: งานที่ต้องการให้ทำ
+      - name: employee_id
+        type: string
+        required: false
+        description: รหัสพนักงาน (ถ้ามี)
+    example: |
+      iris_hrms(task="สร้างข้อมูลพนักงานใหม่", employee_id="EMP001")
+
+# ═══════════════════════════════════════════════════════
+# Tool Calling Pattern
+# ═══════════════════════════════════════════════════════
+# สำหรับใช้งานจริงใน OpenClaw:
+#
+# Pattern 1: Supervisor (มะลิสั่งงาน)
+#   sessions_spawn(agentId="pm_accounting", task="ทำ P&L")
+#
+# Pattern 2: Direct Tool Call (เรียกตรง)
+#   ต้อง implement เป็น function ที่เรียก spawn ภายใน
+#
+# Pattern 3: Swarm (Agents ตัดสินใจเอง)
+#   ปัจจุบันยังไม่รองรับ - ต้องพัฒนาเพิ่ม
+# ═══════════════════════════════════════════════════════
+
+calling_patterns:
+  supervisor:
+    description: มะลิเป็นหัวหน้า สั่งงาน Sub-agents
+    example: |
+      sessions_spawn(
+        agentId="pm_accounting",
+        task="ทำ P&L Report ประจำเดือน กุมภาพันธ์ 2026"
+      )
+    status: active
+
+  tool_call:
+    description: เรียก Agent เป็น Tool
+    example: |
+      luna_accounting(task="ทำ P&L", month="2026-02")
+    status: planned  # ต้องพัฒนาเพิ่ม
+
+  swarm:
+    description: Agents ตัดสินใจเองว่าจะส่งต่อให้ใคร
+    example: |
+      ลูน่าทำบัญชีเสร็จ → ส่งต่อให้ไอริสทำ Payroll
+    status: planned  # ต้องพัฒนาเพิ่ม

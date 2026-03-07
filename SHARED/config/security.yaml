@@ -1,0 +1,71 @@
+# Security Configuration
+# การตั้งค่าความปลอดภัย
+
+security:
+  # ═══════════════════════════════════════════════════════
+  # Sensitive Data Paths
+  # ═══════════════════════════════════════════════════════
+  sensitive_data:
+    # ข้อมูลที่ต้องจำกัดการเข้าถึง
+    
+    - path: /shared/knowledge/company/salary
+      description: ข้อมูลเงินเดือน
+      access: [mali, pm_hrms]
+      
+    - path: /shared/knowledge/company/financial
+      description: ข้อมูลทางการเงินที่ไม่เปิดเผย
+      access: [mali, pm_accounting]
+      
+    - path: /shared/knowledge/hr/personal
+      description: ข้อมูลส่วนตัวพนักงาน
+      access: [mali, pm_hrms]
+      
+    - path: /shared/config
+      description: ไฟล์ตั้งค่าระบบ
+      access: [mali]
+
+  # ═══════════════════════════════════════════════════════
+  # API Keys & Secrets
+  # ═══════════════════════════════════════════════════════
+  secrets:
+    # ไม่เก็บ secrets ไว้ใน shared folder
+    # เก็บใน environment variables หรือ secrets manager
+    
+    note: |
+      ห้ามเก็บ API keys, passwords, หรือ secrets 
+      ไว้ใน shared folder โดยเด็ดขาด
+      
+  # ═══════════════════════════════════════════════════════
+  # Agent Permissions
+  # ═══════════════════════════════════════════════════════
+  agent_permissions:
+    mali:
+      can_spawn: [pm_accounting, pm_hrms]
+      can_read_all: true
+      can_write_shared: true
+      
+    pm_accounting:
+      can_spawn: []
+      can_read_shared: true
+      can_write_shared: false
+      can_write_own_workspace: true
+      
+    pm_hrms:
+      can_spawn: []
+      can_read_shared: true
+      can_write_shared: false
+      can_write_own_workspace: true
+
+  # ═══════════════════════════════════════════════════════
+  # Audit Log
+  # ═══════════════════════════════════════════════════════
+  audit:
+    # บันทึกการเข้าถึงข้อมูลที่สำคัญ
+    enabled: true
+    
+    log_access:
+      - sensitive_data_read
+      - sensitive_data_write
+      - config_change
+      
+    log_file: /shared/logs/security.log

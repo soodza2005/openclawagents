@@ -1,0 +1,86 @@
+# SHARED Folder Configuration
+# การตั้งค่าสำหรับ Shared Center
+
+shared:
+  # ═══════════════════════════════════════════════════════
+  # Shared Folder Paths
+  # ═══════════════════════════════════════════════════════
+  paths:
+    root: agents/SHARED
+    
+    memory:
+      root: agents/SHARED/memory
+      team: agents/SHARED/memory/team_memory.md
+      context: agents/SHARED/memory/context
+      
+    knowledge:
+      root: agents/SHARED/knowledge
+      company: agents/SHARED/knowledge/company
+      hr: agents/SHARED/knowledge/hr
+      accounting: agents/SHARED/knowledge/accounting
+      
+    config:
+      root: agents/SHARED/config
+      agents: agents/SHARED/config/agents.yaml
+      security: agents/SHARED/config/security.yaml
+      
+    logs:
+      root: agents/SHARED/logs
+      team: agents/SHARED/logs/team.log
+
+  # ═══════════════════════════════════════════════════════
+  # Access Control
+  # ═══════════════════════════════════════════════════════
+  access:
+    # ใครมีสิทธิ์เข้าถึง shared folder
+    read:
+      - mali
+      - pm_accounting
+      - pm_hrms
+      
+    # ใครมีสิทธิ์เขียน shared folder
+    write:
+      - mali  # มะลิเป็นหัวหน้า ควบคุมการเขียน
+    
+    # ใครมีสิทธิ์แก้ไข config
+    config:
+      - mali
+
+  # ═══════════════════════════════════════════════════════
+  # Memory Settings
+  # ═══════════════════════════════════════════════════════
+  memory:
+    # รูปแบบ memory (future: rag, vector)
+    type: file  # file, rag, vector
+    
+    # การ sync memory
+    sync:
+      # ทุกครั้งที่ agent ทำงานเสร็จ ให้บันทึกลง shared memory
+      on_task_complete: true
+      
+      # ทุกกี่ชั่วโมงให้ sync memory อัตโนมัติ
+      auto_sync_interval_minutes: 30
+
+  # ═══════════════════════════════════════════════════════
+  # Knowledge Base Settings
+  # ═══════════════════════════════════════════════════════
+  knowledge:
+    # โฟลเดอร์เอกสาร
+    folders:
+      company:
+        - name: นโยบายบริษัท
+          path: knowledge/company/policies/
+        - name: ข้อมูลบริษัท
+          path: knowledge/company/info/
+          
+      hr:
+        - name: คู่มือพนักงาน
+          path: knowledge/hr/handbook/
+        - name: แบบฟอร์ม
+          path: knowledge/hr/forms/
+          
+      accounting:
+        - name: คู่มือบัญชี
+          path: knowledge/accounting/manual/
+        - name: รายงาน
+          path: knowledge/accounting/reports/

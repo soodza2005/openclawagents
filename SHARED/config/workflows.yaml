@@ -1,0 +1,129 @@
+# Workflow Orchestration Configuration
+# การตั้งค่า Workflows - กำหนดว่างานแต่ละแบบต้องใช้ Agent ไหนบ้างตามลำดับ
+
+# ═══════════════════════════════════════════════════════════════
+# Standard Workflows
+# ═══════════════════════════════════════════════════════════════
+
+workflows:
+  # ═══════════════════════════════════════════════════════
+  # Monthly Closing Workflow
+  # ═══════════════════════════════════════════════════════
+  monthly_closing:
+    name: ปิดบัญชีประจำเดือน
+    description: ขั้นตอนการปิดบัญชีรายเดือน
+    trigger: สั่งจากพี่อุ้ยหรือตาม schedule
+    
+    steps:
+      - step: 1
+        agent: pm_accounting
+        task: ตรวจสอบและปิด Journal Entries
+        description: ตรวจสอบรายการบันทึกบัญชีทั้งหมด
+        
+      - step: 2
+        agent: pm_accounting
+        task: Run P&L Report
+        description: สร้างงบกำไรขาดทุน
+        
+      - step: 3
+        agent: pm_accounting
+        task: ตรวจสอบ VAT
+        description: ตรวจสอบภาษีมูลค่าเพิ่ม
+        
+      - step: 4
+        agent: pm_accounting
+        task: ตรวจสอบยอดธนาคาร
+        description: reconcile กับ Bank Statement
+        
+    expected_output: |
+      - P&L Report
+      - VAT Report
+      - Bank Reconciliation
+      
+    estimated_time: 30-60 นาที
+
+  # ═══════════════════════════════════════════════════════
+  # New Employee Onboarding Workflow
+  # ═══════════════════════════════════════════════════════
+  new_employee:
+    name: รับพนักงานใหม่
+    description: ขั้นตอนการรับพนักงานใหม่เข้าทำงาน
+    trigger: พี่อุ้ยสั่งให้รับพนักงานใหม่
+    
+    steps:
+      - step: 1
+        agent: pm_hrms
+        task: สร้างข้อมูลพนักงาน
+        description: |
+          - บันทึกข้อมูลส่วนตัว
+          - กำหนดตำแหน่ง
+          - กำหนดแผนก
+        
+      - step: 2
+        agent: pm_accounting
+        task: Setup ในระบบบัญชี
+        description: |
+          - สร้าง Vendor (ถ้ามี)
+          - Setup Employee Code
+          
+      - step: 3
+        agent: pm_hrms
+        task: Setup Payroll
+        description: |
+          - กำหนดเงินเดือน
+          - ตั้งค่าประกันสังคม
+          - หักภาษี ณ ที่จ่าย
+        
+    expected_output: |
+      - ข้อมูลพนักงานในระบบ HR
+      - ข้อมูลในระบบบัญชี
+      - Payroll พร้อมจ่าย
+      
+    estimated_time: 15-30 นาที
+
+  # ═══════════════════════════════════════════════════════
+  # Expense Claim Workflow
+  # ═══════════════════════════════════════════════════════
+  expense_claim:
+    name: เบิกค่าใช้จ่าย
+    description: ขั้นตอนการเบิกค่าใช้จ่าย
+    trigger: พนักงานขอเบิกค่าใช้จ่าย
+    
+    steps:
+      - step: 1
+        agent: pm_hrms
+        task: ตรวจสอบคำขอเบิก
+        description: |
+          - ตรวจสอบเอกสาร
+          - ตรวจสอบนโยบายบริษัท
+          
+      - step: 2
+        agent: pm_accounting
+        task: บันทึกและจ่ายเงิน
+        description: |
+          - บันทึกใน AP
+          - จ่ายเงิน
+          
+    expected_output: |
+      - ใบเสร็จรับเงิน
+      - Journal Entry
+      
+    estimated_time: 10-20 นาที
+
+# ═══════════════════════════════════════════════════════
+# Workflow Execution Guide
+# ═══════════════════════════════════════════════════════
+# 
+# วิธีเรียกใช้ Workflow:
+#
+# 1. พี่อุ้ยสั่ง: "ปิดบัญชีเดือนที่แล้ว"
+# 2. มะลิจะ:
+#    - อ่าน workflow monthly_closing
+#    - spawn pm_accounting ทีละ step
+#    - รอผลแต่ละ step
+#    - รวมผลรายงานพี่อุ้ย
+#
+# Future Enhancement:
+# - สร้าง workflow engine อัตโนมัติ
+# - ให้ agents เรียกกันเองตาม workflow
+# ═══════════════════════════════════════════════════════

@@ -1,0 +1,94 @@
+# Knowledge Base Configuration
+# การตั้งค่า Knowledge Base
+
+knowledge:
+  # ═══════════════════════════════════════════════════════
+  # Knowledge Sources
+  # ═══════════════════════════════════════════════════════
+  sources:
+    company:
+      name: ข้อมูลบริษัท
+      path: knowledge/company
+      files:
+        - policies.md
+        - info.md
+      
+    hr:
+      name: ข้อมูลบุคคล
+      path: knowledge/hr
+      files:
+        - handbook.md
+        - forms/*.md
+        
+    accounting:
+      name: ข้อมูลบัญชี
+      path: knowledge/accounting
+      files:
+        - manual.md
+        - reports/*.md
+
+  # ═══════════════════════════════════════════════════════
+  # Search Settings
+  # ═══════════════════════════════════════════════════════
+  search:
+    # ใช้ tool สำหรับค้นหา
+    tool: search_knowledge.py
+    
+    # ค้นหากี่ไฟล์สูงสุด
+    max_results: 10
+    
+    # รวมไฟล์ที่ค้นหา
+    include_extensions:
+      - .md
+      - .txt
+      - .pdf
+      - .json
+      
+  # ═══════════════════════════════════════════════════════
+  # Embedding Settings (Future)
+  # ═══════════════════════════════════════════════════════
+  # embedding:
+  #   provider: openai  # openai, anthropic, ollama
+  #   model: text-embedding-3-small
+  #   enabled: false  # ยังไม่เปิดใช้งาน
+
+  # ═══════════════════════════════════════════════════════
+  # Tools Available for Agents
+  # ═══════════════════════════════════════════════════════
+  tools:
+    # ค้นหาข้อมูลใน knowledge
+    - name: search_knowledge
+      description: ค้นหาข้อมูลใน Knowledge Base ของทีม
+      command: python agents/SHARED/tools/search_knowledge.py "{query}"
+      
+    # อ่านไฟล์ใน knowledge
+    - name: read_knowledge
+      description: อ่านเอกสารใน Knowledge Base
+      path: agents/SHARED/knowledge/
+      
+    # อ่าน team memory
+    - name: read_team_memory
+      description: อ่านข้อมูลร่วมกันของทีม
+      path: agents/SHARED/memory/team_memory.md
+
+  # ═══════════════════════════════════════════════════════
+  # Index for Quick Reference
+  # ═══════════════════════════════════════════════════════
+  index:
+    # สรุปหัวข้อสำคัญ
+    topics:
+      - name: นโยบายบริษัท
+        file: knowledge/company/policies.md
+        tags: [policy, company]
+        
+      - name: ข้อมูลบริษัท
+        file: knowledge/company/info.md
+        tags: [company, info]
+        
+      - name: คู่มือพนักงาน
+        file: knowledge/hr/handbook.md
+        tags: [hr, employee, handbook]
+        
+      - name: คู่มือบัญชี
+        file: knowledge/accounting/manual.md
+        tags: [accounting, manual, tax]

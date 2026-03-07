@@ -1,0 +1,73 @@
+# Agents Registry
+# รายชื่อ Agents ทั้งหมดในระบบ
+
+agents:
+  # ═══════════════════════════════════════════════════════
+  # MANAGER AGENT
+  # ═══════════════════════════════════════════════════════
+  - id: mali
+    name: มะลิ
+    code_name: Mali
+    role: Manager / Executive Secretary
+    description: |
+      ผู้ประสานงานหลัก รับคำสั่งจากพี่อุ้ยและมอบหมายงานให้ Agents อื่น
+    avatar: 🌸
+    tools: [all]
+    workspace: agents/mali/workspace
+    parent: null
+    status: active
+    created_at: 2025-01-01
+
+  # ═══════════════════════════════════════════════════════
+  # SUB AGENTS
+  # ═══════════════════════════════════════════════════════
+  - id: pm_accounting
+    name: ลูน่า
+    code_name: Luna
+    role: PM-Accounting
+    description: |
+      ดูแลงานบัญชีทั้งหมด - GL, AP, AR, ภาษี, งบการเงิน
+    avatar: 🌙
+    tools: [exec, read, write, edit, browser, database]
+    workspace: agents/pm_accounting/workspace
+    parent: mali
+    status: active
+    created_at: 2025-01-01
+
+  - id: pm_hrms
+    name: ไอริส
+    code_name: Iris
+    role: PM-HRMS
+    description: |
+      ดูแลงานบุคคล - พนักงาน, เงินเดือน, วันลา, KPI, PDPA
+    avatar: 🌈
+    tools: [exec, read, write, edit, browser, database]
+    workspace: agents/pm_hrms/workspace
+    parent: mali
+    status: active
+    created_at: 2025-01-01
+
+  # ═══════════════════════════════════════════════════════
+  # FUTURE AGENTS (Reserved)
+  # ═══════════════════════════════════════════════════════
+  # - id: pm_sales
+  #   name: (TBD)
+  #   code_name: Sales
+  #   role: PM-Sales
+  #   description: ดูแลงานขายและลูกค้าสัมพันธ์
+  #   avatar: 💼
+  #   tools: [exec, browser, email, crm]
+  #   workspace: agents/pm_sales/workspace
+  #   parent: mali
+  #   status: planned
+
+  # - id: pm_it
+  #   name: (TBD)
+  #   code_name: IT
+  #   role: PM-IT
+  #   description: ดูแลระบบ IT และโครงสร้างพื้นฐาน
+  #   avatar: 🔧
+  #   tools: [exec, ssh, docker, monitoring]
+  #   workspace: agents/pm_it/workspace
+  #   parent: mali
+  #   status: planned
