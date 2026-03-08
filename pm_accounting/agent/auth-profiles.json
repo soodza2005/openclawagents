@@ -4,20 +4,15 @@
     "minimax-portal:default": {
       "type": "oauth",
       "provider": "minimax-portal",
-      "access": "sk-cp-IneQdY-f94c1kjRQGTIl-9PArPGqye6eS--JMGbDMFB3RyclHQ44mqcVWK4rkjo6pCLiGWNmrBNxjA11j5yfbO-8no5jPGtkybFuU91F2UJnwex8vYUdFsY",
-      "refresh": "6PYfLSCxxlPWnsVmnkfY7AjGWQOQSlb7GkgJZV0axBQ=",
-      "expires": 1804153934013
-    },
-    "github-copilot:github": {
-      "type": "token",
-      "provider": "github-copilot",
-      "token": "ghu_VhKtzGpuH9VwGYxc1Fw0R6aisUUqjn4IqhEv"
+      "access": "sk-cp-_pLdfB20IhEH8Jy2ak3t1G-2i9lXAsVDlXEWWMdpMZer-wGOg_Bgl4qgF8yIEpc3sfdckSpXv4zmwtT8U8ok1fhT_oY8jsvtRtH43gc8eE-Cw-HSPoAb6WY",
+      "refresh": "1jyE_cQxn3YgAHdiq-VdhXF8GHY04s4q0nUqhmwe00Q=",
+      "expires": 1804500911944
     }
   },
   "usageStats": {
     "minimax-portal:default": {
       "errorCount": 0,
-      "lastUsed": 1772648530100
+      "lastUsed": 1772985570372
     }
   }
 }

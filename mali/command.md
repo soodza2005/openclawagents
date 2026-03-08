@@ -18,7 +18,10 @@ pnpm start gateway
 # Dev Clean
  pnpm store prune
 
+openclaw doctor --fix
+openclaw gateway install --force
 openclaw gateway start
+openclaw gateway status
 openclaw gateway restart
 openclaw gateway stop
 
