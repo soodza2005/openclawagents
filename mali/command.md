@@ -17,4 +17,12 @@ pnpm start gateway
 
 # Dev Clean
  pnpm store prune
+
+openclaw gateway start
+openclaw gateway restart
+openclaw gateway stop
+
+
+openclaw sessions clear
+
 ```
